@@ -1,6 +1,6 @@
 #Suppliers management service
 
-This is a microservice that handles the management and authentication of users including customers
+This is a microservice that handles the management of suppliers
 
 ---
 
@@ -12,7 +12,7 @@ This is a microservice that handles the management and authentication of users i
 
 ---
 
-## User Model
+## Supplier Model
 
 | field                 | data_type | constraints      |
 | ----------------      | --------- | ---------------- |
