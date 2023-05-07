@@ -1,16 +1,14 @@
-# Users management service
+#Suppliers management service
 
 This is a microservice that handles the management and authentication of users including customers
 
 ---
 
 ## Basic Features
-
-- Login
-- Registration
-- Get users
-- Update users
-- Delete users
+- create suppliers
+- Get suppliers
+- Update suppliers
+- Delete suppliers
 
 ---
 
