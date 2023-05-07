@@ -1,0 +1,342 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "User management service",
+      "description": "This is for users management",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8089",
+    "basePath": "/api/v1/users",
+    "tags": [
+      {
+        "name": "User service", 
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/create": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Create users in system",
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User details for creating a new user",
+              "schema": {
+                "$ref": "#/definitions/userModel"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }      
+        }
+        }
+      },
+      "/login": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Login users in the system",
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User details for login in a user",
+              "schema": {
+                "$ref": "#/definitions/loginModel"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "User has login successfully",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }        
+        }
+        }
+    },
+      "/get": {
+        "get": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Get all users in system",
+          "description": "Get all users",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "Bearer token",
+              "description": "Bearer token to authenticate user",
+              "required": true,
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+              
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            } 
+          }
+        }
+    },
+      "/get/{userId}": {
+        "get": {
+            "tags": [
+              "User"
+            ],
+            "summary": "Get user with given ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+            
+          }
+         ],
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }  
+          }
+        }
+    },
+        "/update/{userId}": {
+        "patch": {
+          "summary": "Update user by the userId",
+          "tags": [
+            "User"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "description": "Id of user that we want to find and update",
+              "type": "string"
+            },
+            {
+              "name": "Authorization",
+              "in": "Bearer token",
+              "description": "Bearer token to authenticate user",
+              "required": true,
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+              
+            }
+           ],
+          "responses": {
+            "200": {
+              "description": "User is updated",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+    },
+
+    "/delete/{userId}": {
+        "delete": {
+          "summary": "Delete user by userID",
+          "tags": [
+            "User"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "description": "Id of user that we want to find and delete",
+              "type": "string"
+            },
+            {
+              "name": "Authorization",
+              "in": "Bearer token",
+              "description": "Bearer token to authenticate user",
+              "required": true,
+              "type": "string"
+              
+            }
+           ],
+          "responses": {
+            "200": {
+              "description": "User is deleted"
+              
+            } 
+          }
+        }
+
+    }
+
+    },
+
+    "definitions": {
+      "User": {
+        "required": [
+            "first_name",
+            "last_name",
+            "email",
+            "password",
+            "phone_number",
+            "address",
+            "state",
+            "city"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "middle_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": true
+          },    
+          "phone_number": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "role": {
+            "type": "string"
+        }
+        }
+      },
+      "userModel": {
+        "required": [
+            "first_name",
+            "last_name",
+            "email",
+            "password",
+            "phone_number",
+            "address",
+            "state",
+            "city"
+        ],
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "middle_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": true
+          },    
+          "phone_number": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string"
+        },
+        "city": {
+            "type": "string"
+        },
+        "role": {
+            "type": "string"
+        }
+        }
+      },
+      "loginModel": {
+        "required": [
+            "email",
+            "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }

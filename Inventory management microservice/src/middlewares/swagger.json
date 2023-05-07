@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Inventory management service",
+    "description": "This is for inventory management",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8083",
+  "basePath": "/api/v1/inventory",
+  "tags": [
+    {
+      "name": "inventory", 
+      "description": "API for inventory in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": [
+          "inventory"
+        ],
+        "summary": "Create inventories in system",
+        "description": "Create new inventories in system",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inventory",
+            "in": "body",
+            "description": "inventory details for creating a new product",
+            "schema": {
+              "$ref": "#/definitions/inventoryModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New product is created",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          }      
+      }
+      }
+    },
+    "/get": {
+      "get": {
+        "tags": [
+          "inventory"
+        ],
+        "summary": "Get all inventories in system",
+        "description": "Get all inventories",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          } 
+        }
+      }
+  },
+    "/get/{supplierId}": {
+      "get": {
+          "tags": [
+            "inventory"
+          ],
+          "summary": "Get inventory with given ID",
+      "parameters": [
+        {
+          "name": "inventoryId",
+          "in": "path",
+          "required": true,
+          "description": "ID of inventory that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "Bearer token",
+          "description": "Bearer token to authenticate user",
+          "required": true,
+          "type": "string"
+        }
+       ],
+        "responses": {
+          "200": {
+            "description": "inventory is found",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          }  
+        }
+      }
+  },
+      "/update/{supplierId}": {
+      "patch": {
+        "summary": "Update inventory by id",
+        "tags": [
+          "inventory"
+        ],
+        "parameters": [
+          {
+            "name": "inventoryId",
+            "in": "path",
+            "required": true,
+            "description": "Id of inventory that we want to find and update",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+         ],
+        "responses": {
+          "200": {
+            "description": "inventory is updated",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          }
+        }
+      }
+  },
+
+  "/delete/{supplierId}": {
+      "delete": {
+        "summary": "Delete inventory by id",
+        "tags": [
+          "inventory"
+        ],
+        "parameters": [
+          {
+            "name": "inventoryId",
+            "in": "path",
+            "required": true,
+            "description": "Id of inventory that we want to find and delete",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+         ],
+        "responses": {
+          "200": {
+            "description": "Inventory is deleted"
+          } 
+        }
+      }
+
+  }
+
+  },
+
+  "definitions": {
+    "Inventory": {
+      "required": [
+          "product_name",
+          "description",
+          "price",
+          "quantity",
+          "category"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "product_name": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "description": {
+          "type": "string",
+          "uniqueItems": true
+        }, 
+        "category": {
+          "type": "string"
+      },
+      "price": {
+          "type": "string"
+      },
+      "quantity": {
+          "type": "string"
+      }
+      }
+    },
+    "inventoryModel": {
+      "required": [
+        "product_name",
+        "description",
+        "price",
+        "quantity",
+        "category"
+    ],
+    "properties": {
+      "product_name": {
+        "type": "string",
+        "uniqueItems": true
+      },
+      "description": {
+        "type": "string",
+        "uniqueItems": true
+      }, 
+      "category": {
+        "type": "string"
+    },
+    "price": {
+        "type": "string"
+    },
+    "quantity": {
+        "type": "string"
+    }
+    }
+    }
+  }
+}

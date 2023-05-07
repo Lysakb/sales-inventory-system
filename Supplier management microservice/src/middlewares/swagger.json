@@ -1,0 +1,277 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Supplier management service",
+    "description": "This is for suppliers management",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8087",
+  "basePath": "/api/v1/suppliers",
+  "tags": [
+    {
+      "name": "supplier", 
+      "description": "API for suppliers in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": [
+          "supplier"
+        ],
+        "summary": "Create suppliers in system",
+        "description": "Create new supplier in system",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supplier",
+            "in": "body",
+            "description": "supplier details for creating a new user",
+            "schema": {
+              "$ref": "#/definitions/supplierModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New supplier is created",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          }      
+      }
+      }
+    },
+    "/get": {
+      "get": {
+        "tags": [
+          "supplier"
+        ],
+        "summary": "Get all suppliers in system",
+        "description": "Get all suppliers",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          } 
+        }
+      }
+  },
+    "/get/{supplierId}": {
+      "get": {
+          "tags": [
+            "supplier"
+          ],
+          "summary": "Get supplier with given ID",
+      "parameters": [
+        {
+          "name": "supplierId",
+          "in": "path",
+          "required": true,
+          "description": "ID of supplier that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "Bearer token",
+          "description": "Bearer token to authenticate user",
+          "required": true,
+          "type": "string"
+        }
+       ],
+        "responses": {
+          "200": {
+            "description": "supplier is found",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          }  
+        }
+      }
+  },
+      "/update/{supplierId}": {
+      "patch": {
+        "summary": "Update supplier by id",
+        "tags": [
+          "supplier"
+        ],
+        "parameters": [
+          {
+            "name": "supplierId",
+            "in": "path",
+            "required": true,
+            "description": "Id of supplier that we want to find and update",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+         ],
+        "responses": {
+          "200": {
+            "description": "Supplier is updated",
+            "schema": {
+              "$ref": "#/definitions/Supplier"
+            }
+          }
+        }
+      }
+  },
+
+  "/delete/{supplierId}": {
+      "delete": {
+        "summary": "Delete supplier by id",
+        "tags": [
+          "supplier"
+        ],
+        "parameters": [
+          {
+            "name": "supplierId",
+            "in": "path",
+            "required": true,
+            "description": "Id of supplier that we want to find and delete",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+         ],
+        "responses": {
+          "200": {
+            "description": "Supplier is deleted"
+          } 
+        }
+      }
+
+  }
+
+  },
+
+  "definitions": {
+    "Supplier": {
+      "required": [
+          "full_name",
+          "company_name",
+          "company_address",
+          "company_email",
+          "product_name",
+          "category",
+          "price",
+          "quantity"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "company_address": {
+          "type": "string"
+        },
+        "company_email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "product_name": {
+          "type": "string",
+          "uniqueItems": true
+        },    
+        "category": {
+          "type": "string"
+      },
+      "price": {
+          "type": "string"
+      },
+      "quantity": {
+          "type": "string"
+      }
+      }
+    },
+    "supplierModel": {
+      "required": [
+          "full_name",
+          "company_name",
+          "company_address",
+          "company_email",
+          "product_name",
+          "category",
+          "price",
+          "quantity"
+      ],
+      "properties": {
+        "full_name": {
+          "type": "string"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "company_address": {
+          "type": "string"
+        },
+        "company_email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "product_name": {
+          "type": "string",
+          "uniqueItems": true
+        },    
+        "category": {
+          "type": "string"
+      },
+      "price": {
+          "type": "string"
+      },
+      "quantity": {
+          "type": "string"
+      }
+      }
+    }
+  }
+}

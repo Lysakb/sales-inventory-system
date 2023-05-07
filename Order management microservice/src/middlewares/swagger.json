@@ -1,0 +1,233 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Order management service",
+    "description": "This is for orders management",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8084",
+  "basePath": "/api/v1/orders",
+  "tags": [
+    {
+      "name": "Order system", 
+      "description": "API for orders in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Create orders in system",
+        "description": "Create new order in system",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "body",
+            "description": "order details for creating a new user",
+            "schema": {
+              "$ref": "#/definitions/orderModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New order is created",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }      
+      }
+      }
+    },
+    "/get": {
+      "get": {
+        "tags": [
+          "order"
+        ],
+        "summary": "Get all orders in system",
+        "description": "Get all orders",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          } 
+        }
+      }
+  },
+    "/get/{orderId}": {
+      "get": {
+          "tags": [
+            "order"
+          ],
+          "summary": "Get order with given ID",
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "ID of order that we want to find",
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "Bearer token",
+          "description": "Bearer token to authenticate user",
+          "required": true,
+          "type": "string"
+        }
+       ],
+        "responses": {
+          "200": {
+            "description": "order is found",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }  
+        }
+      }
+  },
+      "/update/{orderId}": {
+      "patch": {
+        "summary": "Update order by id",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "description": "Id of order that we want to find and update",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+         ],
+        "responses": {
+          "200": {
+            "description": "order is updated",
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        }
+      }
+  },
+
+  "/delete/{orderId}": {
+      "delete": {
+        "summary": "Delete order by id",
+        "tags": [
+          "order"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "description": "Id of order that we want to find and delete",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "Bearer token",
+            "description": "Bearer token to authenticate user",
+            "required": true,
+            "type": "string"
+          }
+         ],
+        "responses": {
+          "200": {
+            "description": "order is deleted"
+          } 
+        }
+      }
+
+  }
+
+  },
+
+  "definitions": {
+    "order": {
+      "required": [
+          "items_id",
+          "quantity",
+          "total_amount"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "items_id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string"
+        },
+        "total_amount": {
+          "type": "number"
+        }
+      }
+    },
+    "orderModel": {
+      "required": [
+          "items_id",
+          "quantity",
+          "total_amount"
+      ],
+      "properties": {
+        "items_id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string"
+        },
+        "total_amount": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
