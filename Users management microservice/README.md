@@ -31,7 +31,7 @@ This is a microservice that handles the management and authentication of users i
 
 ---
 
-### Signup User
+### Create User
 
 - Route: api/v1/users/create
 - Method: POST
@@ -76,7 +76,7 @@ Success
 
 ### Login User
 
-- Route: api/v1/login
+- Route: api/v1/users/login
 - Method: POST
 - Body:
 
@@ -96,7 +96,7 @@ Success
     "status": "success",
     "message": "Login Successful",
     "data": {
-            "userId": "4fb2ff09-fa9d-4621-91e1-0d6ec5d089cf",
+            "_id":"4fb2ff09-fa9d-4621-91e1-0d6ec5d089cf",
             "first_ame": "Elizabeth",
             "last_name": "Borokinni"
             "email": "Elizabeth@gmail.com"
@@ -105,6 +105,28 @@ Success
     }
 }
 ```
+### Get Users
+
+- Route: api/v1/users/get
+- Method: Get
+
+```
+### Get Users
+
+- Route: api/v1/users/get/:id
+- Method: Get
+
+```
+
+### Update Users
+
+- Route: api/v1/users/update/:id
+- Method: Patch
+```
+
+### Delete Users
+
+- Route: api/v1/users/delete/:id
+- Method: Delete
 
 ---
-
